@@ -6,7 +6,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>${message}</h1>
+	<h1> ${message} </h1>
 <br/>
     <div class="container">
         <h3>Three equal columns</h3>

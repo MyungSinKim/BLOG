@@ -12,8 +12,6 @@ public class HelloController {
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
 
-        //TEST..   ===
-
-		return "hello";
-	}
+        return "hello";
+    }
 }

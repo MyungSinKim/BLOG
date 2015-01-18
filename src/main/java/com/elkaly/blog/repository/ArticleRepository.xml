@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mybatis.repository.ArticleRepository">
+
+<mapper namespace="ArticleRepository">
     <select id="selectArticleList" resultType="Article">
         SELECT article_no AS articleNo,
         title,
-        body
+        contents
         FROM articles
     </select>
 
-    <insert id="insertArticle" parameterType="Article">
+    <insert id="postArticle" parameterType="Article">
         <selectKey order="AFTER" keyProperty="articleNo" resultType="int">
             select last_insert_id()
         </selectKey>

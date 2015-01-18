@@ -1,5 +1,8 @@
 package com.elkaly.blog.model;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("Article")
 public class Article {
 
     private Integer articleNo;

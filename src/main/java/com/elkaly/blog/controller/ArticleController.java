@@ -1,6 +1,8 @@
 package com.elkaly.blog.controller;
 
 import com.elkaly.blog.model.Article;
+import com.elkaly.blog.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +13,38 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ArticleController {
 
+    @Autowired ArticleService articleService;
+
     //Article CRUD
 
     //POST
-    @RequestMapping(method = RequestMethod.POST, value = "/article")
-    @ResponseBody
-    public Article postAtricle(@RequestBody Article article) {
+    @RequestMapping(value = "/article")
+    public String postAtricle() {
+        Article article = new Article();
+        System.out.println("CALL article controller");
 
-        return article;
+        article.setContents("test111");
+        article.setTitle("title222222");
+
+        articleService.postArticle(article);
+        return "test";
+    }
+
+
+
+    /*
+    //POST
+    @RequestMapping(method = RequestMethod.POST, value = "/article")
+    //@ResponseBody
+    public String postAtricle(@RequestBody Article article) {
+        Article article = new Article();
+        System.out.print("CALL article controller");
+
+        article.setContents("test111");
+        article.setTitle("title222222");
+
+        articleService.postArticle(article);
+        return "hello";
     }
 
     //GET
@@ -54,5 +80,6 @@ public class ArticleController {
         model.addAttribute("message", "GET Method Call");
         return "article/articleList";
     }
+    */
 
 }

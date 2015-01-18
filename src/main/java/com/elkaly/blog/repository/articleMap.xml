@@ -8,4 +8,15 @@
         FROM articles
     </select>
 
+    <insert id="insertArticle" parameterType="Article">
+        <selectKey order="AFTER" keyProperty="articleNo" resultType="int">
+            select last_insert_id()
+        </selectKey>
+        INSERT into articles ( title, contents)
+        values (
+        #{title},
+        #{contents}
+        )
+    </insert>
+
 </mapper>

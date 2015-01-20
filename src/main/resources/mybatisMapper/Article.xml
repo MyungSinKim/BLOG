@@ -13,4 +13,29 @@
         )
     </insert>
 
+    <select id="selectArticle" parameterType="Integer" resultType="com.elkaly.blog.model.Article">
+        SELECT ARTICLE_NO as articleNo,
+               TITLE,
+               CONTENTS
+          FROM ARTICLES
+         WHERE ARTICLE_NO = #{articleNo}
+    </select>
+
+    <update id="updateArticle" parameterType="com.elkaly.blog.model.Article">
+        UPDATE ARTICLES
+           SET TITLE = #{title}
+               , CONTENTS = #{contents}
+         WHERE ARTICLE_NO = #{articleNo}
+    </update>
+
+    <delete id="deleteArticle" parameterType="Integer">
+        DELETE FROM ARTICLES WHERE ARTICLE_NO = #{articleNo}
+    </delete>
+
+    <select id = "selectArticles" resultType="com.elkaly.blog.model.Article">
+        SELECT ARTICLE_NO as articleNo,
+               TITLE,
+               CONTENTS
+          FROM ARTICLES
+    </select>
 </mapper>

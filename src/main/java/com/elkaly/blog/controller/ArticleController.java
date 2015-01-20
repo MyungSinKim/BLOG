@@ -23,9 +23,6 @@ public class ArticleController {
     @Autowired
     ArticleService articleService;
 
-
-
-
     //Article CRUD
     //POST
     @RequestMapping(method = RequestMethod.POST, value = "/article")

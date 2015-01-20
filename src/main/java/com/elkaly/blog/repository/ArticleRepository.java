@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public class ArticleRepository {
@@ -16,7 +18,21 @@ public class ArticleRepository {
         sqlSession.insert("Article.insertArticle", article);
     }
 
-    public void getArticle(Article article){
-
+    public Article getArticle(Integer articleNo){
+        return sqlSession.selectOne("Article.selectArticle", articleNo);
     }
+
+
+    public void putArticle(Article article){
+        sqlSession.update("Article.updateArticle", article);
+    }
+
+    public void deleteArticle(Integer articleNo){
+        sqlSession.delete("Article.deleteArticle", articleNo);
+    }
+
+    public List<Article> getArticles(){
+        return sqlSession.selectList("Article.selectArticles");
+    }
+
 }

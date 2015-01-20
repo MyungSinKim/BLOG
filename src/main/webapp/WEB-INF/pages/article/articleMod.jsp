@@ -5,7 +5,6 @@
     <title></title>
 </head>
 <body>
-LIST PAGE<br/>
-${articles}
+MOD PAGE
 </body>
 </html>

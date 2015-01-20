@@ -5,6 +5,6 @@
     <title></title>
 </head>
 <body>
-
+ARTICLE PAGE
 </body>
 </html>

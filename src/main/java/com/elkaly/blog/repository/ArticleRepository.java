@@ -22,7 +22,6 @@ public class ArticleRepository {
         return sqlSession.selectOne("Article.selectArticle", articleNo);
     }
 
-
     public void putArticle(Article article){
         sqlSession.update("Article.updateArticle", article);
     }

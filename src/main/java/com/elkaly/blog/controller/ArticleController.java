@@ -1,6 +1,7 @@
 package com.elkaly.blog.controller;
 
 import com.elkaly.blog.model.Article;
+import com.elkaly.blog.model.ArticleList;
 import com.elkaly.blog.service.ArticleService;
 import com.google.gson.Gson;
 import org.apache.ibatis.session.SqlSession;
@@ -57,7 +58,7 @@ public class ArticleController {
     //GET
     @RequestMapping(method = RequestMethod.GET, value = "/articles")
     public String getAtricleList(ModelMap model) {
-        String json = new Gson().toJson(articleService.getArticles() );
+        String json = new Gson().toJson(new ArticleList(articleService.getArticles()) );
         model.addAttribute("articles", json);
         return "article/articleList";
     }

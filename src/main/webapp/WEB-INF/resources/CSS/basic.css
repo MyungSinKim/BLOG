@@ -1,8 +1,0 @@
-body {
-        background-image: url('../image/snow.png');
-        background-repeat: no-repeat;
-        background-position: right bottom;
-        background-attachment: fixed;
-        background-size: 10%;
-}
-div.main{color:blue}

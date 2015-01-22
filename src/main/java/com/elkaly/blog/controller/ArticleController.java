@@ -51,15 +51,21 @@ public class ArticleController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/articles/{articleNo}")
     public String deleteAtricle(ModelMap model, @PathVariable("articleNo") Integer articleNo) {
         articleService.deleteArticle(articleNo);
-        return getAtricleList(model);
+        return getArticleList(model);
     }
 
-    //Article List
+    //Article List Page
     //GET
     @RequestMapping(method = RequestMethod.GET, value = "/articles")
-    public String getAtricleList(ModelMap model) {
-        String json = new Gson().toJson(new ArticleList(articleService.getArticles()) );
-        model.addAttribute("articles", json);
+    public String getArticleList(ModelMap model) {
         return "article/articleList";
+    }
+
+    //Article List Data
+    @RequestMapping(method = RequestMethod.GET, value = "/articleListData", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String getAtricles(ModelMap model) {
+        String json = new Gson().toJson(new ArticleList(1,1,1, articleService.getArticles()) );
+        return json;
     }
 }

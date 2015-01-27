@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ExampleController {
 
-    //DELETE
+    //jqGrid
     @RequestMapping(value = "/jqGrid")
     public String jqGridSample(ModelMap model) {
-
-
         return "example/jqGrid";
     }
+
+    //tiles
+    @RequestMapping(value = "/tiles")
+    public String tilesSample(ModelMap model) {
+        return "tiles";
+    }
+
 
 }

@@ -21,25 +21,20 @@
 <div id="jqGridPager"></div>
 
 <script type="text/javascript">
+    var lastSel;
 
     $(document).ready(function () {
         $("#jqGrid").jqGrid({
             colModel: [
-                {
-                    label: 'articleNo', name: 'articleNo', width: 35, sorttype:'integer', formatter: 'number', align: 'right'
-                },
-                {
-                    label: 'title', name: 'title', width: 150
-                },
-                {
-                    label: 'contents', name: 'contents', width: 150, formatter: formatContents
-                }
+                { label: 'articleNo', name: 'articleNo', width: 35, sorttype:'integer', formatter: 'integer', align: 'right' },
+                { label: 'title', name: 'title', width: 150 },
+                { label: 'contents', name: 'contents', width: 150, formatter: formatContents }
             ],
 
             viewrecords: true, // show the current page, data rang and total records on the toolbar
             width: 780,
             height: 200,
-            rowNum: 15,
+            rowNum: 5,
             datatype: 'local',
 //            datatype: 'json',
 
@@ -52,7 +47,17 @@
 //            },
 //            url: "/articleListData",
             pager: "#jqGridPager",
-            caption: "Article List"
+            caption: "Article List",
+
+            //event handling
+            onSelectRow: function(id){
+                var articleNo = $(this).jqGrid ('getCell', id, 'articleNo');
+
+                location.href = "/articles/"+ articleNo;
+            },
+
+            gridComplete: function(){
+            }
 
         });
 
@@ -91,6 +96,11 @@
             return cellValue.substring(0, 50) + "...";
         };
 
+
+        function formatButtons(cellvalue, options, rowObject){
+
+            return "<button type=button>"+"MOD"+ rowObject.articleNo  +"</button>";
+        };
         function formatLink(cellValue, options, rowObject) {
             return "<a href='" + cellValue + "'>" + cellValue.substring(0, 25) + "..." + "</a>";
         };

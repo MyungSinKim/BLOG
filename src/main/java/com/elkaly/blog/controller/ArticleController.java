@@ -30,6 +30,9 @@ public class ArticleController {
     //GET
     @RequestMapping(method = RequestMethod.GET, value = "/articles/{articleNo}")
     public String getAtricle(ModelMap model, @PathVariable("articleNo") Integer articleNo) {
+
+        logger.debug("CALL getArticle Method: " + articleNo + "================");
+
         Article article = articleService.getArticle(articleNo);
         model.addAttribute("article", article);
         return "article/article";

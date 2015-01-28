@@ -11,12 +11,20 @@
         <put-attribute name="footer" value="/WEB-INF/pages/layout/footer.jsp" />
     </definition>
 
-
+    <!-- name은 controller에서 return되는 페이지 -->
+    <!-- value는 매핑해야 할 jsp페이지 -->
     <definition name="tiles" extends="default">
-        <put-attribute name="header" value="header TEST" />
-        <put-attribute name="menu" value="menu TEST" />
-        <put-attribute name="body" value="body TEST" />
-        <put-attribute name="footer" value="footer TEST" />
+        <put-attribute name="body" value="/WEB-INF/pages/article/articleList.jsp" />
     </definition>
+
+
+    <definition name="index" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/article/articleList.jsp" />
+    </definition>
+
+    <definition name="article/article" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/article/article.jsp" />
+    </definition>
+
 
 </tiles-definitions>

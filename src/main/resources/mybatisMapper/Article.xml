@@ -6,25 +6,31 @@
         <selectKey order="AFTER" keyProperty="articleNo" resultType="int">
             select last_insert_id()
         </selectKey>
-        INSERT into articles ( title, contents)
+        INSERT into articles ( title, contents, ctg_seq)
         values (
         #{title},
-        #{contents}
+        #{contents},
+        #{ctgSeq}
         )
     </insert>
 
     <select id="selectArticle" parameterType="Integer" resultType="Article">
-        SELECT ARTICLE_NO as articleNo,
-               TITLE,
-               CONTENTS
-          FROM ARTICLES
-         WHERE ARTICLE_NO = #{articleNo}
+                SELECT ARTICLES.ARTICLE_NO as articleNo,
+                       ARTICLES.TITLE,
+                       ARTICLES.CONTENTS,
+                       ARTICLES.CTG_SEQ AS ctgSeq,
+                       CTG.CTG_NAME AS ctgName
+                  FROM ARTICLES ARTICLES
+       LEFT OUTER JOIN ARTICLE_CTG CTG
+                    ON ARTICLES.CTG_SEQ = CTG.SEQ
+                 WHERE ARTICLE_NO = #{articleNo}
     </select>
 
     <update id="updateArticle" parameterType="Article">
         UPDATE ARTICLES
            SET TITLE = #{title}
                , CONTENTS = #{contents}
+               , CTG_SEQ = #{ctgSeq}
          WHERE ARTICLE_NO = #{articleNo}
     </update>
 
@@ -33,10 +39,14 @@
     </delete>
 
     <select id = "selectArticles" resultType="Article">
-        SELECT ARTICLE_NO as articleNo,
-               TITLE,
-               CONTENTS
-          FROM ARTICLES
-      ORDER BY ARTICLE_NO DESC
+                SELECT ARTICLES.ARTICLE_NO as articleNo,
+                       ARTICLES.TITLE,
+                       ARTICLES.CONTENTS,
+                       ARTICLES.CTG_SEQ AS ctgSeq,
+                       CTG.CTG_NAME AS ctgName
+                  FROM ARTICLES ARTICLES
+       LEFT OUTER JOIN ARTICLE_CTG CTG
+                    ON ARTICLES.CTG_SEQ = CTG.SEQ
+              ORDER BY ARTICLE_NO DESC
     </select>
 </mapper>

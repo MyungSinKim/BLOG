@@ -28,7 +28,9 @@
             colModel: [
                 { label: 'articleNo', name: 'articleNo', width: 35, sorttype:'integer', formatter: 'integer', align: 'right' },
                 { label: 'title', name: 'title', width: 150 },
-                { label: 'contents', name: 'contents', width: 150, formatter: formatContents }
+                { label: 'contents', name: 'contents', width: 150, formatter: formatContents },
+                { label: 'ctgName', name: 'ctgName', width: 150 }
+
             ],
 
             viewrecords: true, // show the current page, data rang and total records on the toolbar

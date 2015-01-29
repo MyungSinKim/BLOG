@@ -12,7 +12,10 @@
 
 <script type="application/javascript">
     $(document).ready(function () {
+        //get category
+        fnGetArticleCtgData();
 
+        //button setting
         fnVisibleButton("${article.articleNo}");
 
         $('#btnPost').click(function() {
@@ -22,7 +25,8 @@
                 var jsonData = {
                     "articleNo": "",
                     "title":     $('#title').val(),
-                    "contents":  $('#contents').val()
+                    "contents":  $('#contents').val(),
+                    "ctgSeq": $('#articleCtg option:selected').val()
                 };
 
                 $.ajax({
@@ -51,7 +55,8 @@
                 var jsonData = {
                     "articleNo": $('#articleNo').val(),
                     "title":     $('#title').val(),
-                    "contents":  $('#contents').val()
+                    "contents":  $('#contents').val(),
+                    "ctgSeq": $('#articleCtg option:selected').val()
                 };
 
                 $.ajax({
@@ -94,6 +99,27 @@
         });
     });
 
+
+    function fnGetArticleCtgData(){
+        $.ajax({
+            type: 'GET',
+            url: "/articleCtgData",
+            success: function(result) {
+                console.log(result);
+                for (var i = 0; i < result.length; i++) {
+                    var item = result[i];
+                    $("#articleCtg").append("<option value="+item.seq+">" + item.ctgName +"</option>");
+                }
+                if("${article.ctgSeq}".length > 0){
+                    $("#articleCtg").val("${article.ctgSeq}");
+                }
+            },
+            error:function(request, status, error){
+                alert("ERROR: " + request + " " + status + " " +error);
+            }
+        });
+    }
+
     function fnVisibleButton(articleNo){
         if(articleNo.length > 0){
             $('#btnPost').hide();
@@ -116,7 +142,7 @@
 <div id="content">
 
 
-
+    <select id="articleCtg"></select>
         <table>
             <tr>
                 <td colspan="2">

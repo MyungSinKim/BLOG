@@ -38,7 +38,7 @@
         DELETE FROM ARTICLES WHERE ARTICLE_NO = #{articleNo}
     </delete>
 
-    <select id = "selectArticles" resultType="Article">
+    <select id = "selectArticles" resultType="Article" parameterType="Article">
                 SELECT ARTICLES.ARTICLE_NO as articleNo,
                        ARTICLES.TITLE,
                        ARTICLES.CONTENTS,
@@ -47,6 +47,10 @@
                   FROM ARTICLES ARTICLES
        LEFT OUTER JOIN ARTICLE_CTG CTG
                     ON ARTICLES.CTG_SEQ = CTG.SEQ
+                 WHERE 1=1
+                <if test = "ctgName != null">
+                    AND CTG_NAME = #{ctgName}
+                </if>
               ORDER BY ARTICLE_NO DESC
     </select>
 </mapper>

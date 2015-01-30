@@ -17,6 +17,8 @@
 </head>
 <body>
 
+
+<div id="ctgName"></div>
 <table id="jqGrid"></table>
 <div id="jqGridPager"></div>
 
@@ -24,6 +26,11 @@
     var lastSel;
 
     $(document).ready(function () {
+
+        if("${article.ctgName}".length > 0 ){
+            $('#ctgName').append("${article.ctgName}");
+        }
+
         $("#jqGrid").jqGrid({
             colModel: [
                 { label: 'articleNo', name: 'articleNo', width: 35, sorttype:'integer', formatter: 'integer', align: 'right' },
@@ -64,12 +71,15 @@
         });
 
         fetchGridData();
-
         function fetchGridData() {
 
             var gridArrayData = [];
             $.ajax({
+                type: 'GET',
                 url: "/articleListData",
+                //contentType: 'application/json',
+                data: "ctgName=${article.ctgName}",
+                dataType: 'json',
                 success: function (result) {
                     /*
                     for (var i = 0; i < result.rows.length; i++) {
@@ -80,12 +90,9 @@
                             title: item.title,
                             contents: item.contents
                         });
-
-                        alert(gridArrayData[i]);
                     }
                     $("#jqGrid").jqGrid('setGridParam', { data: gridArrayData});
                     */
-
                     // set the new data
                     $("#jqGrid").jqGrid('setGridParam', { data: result.rows});
                     // refresh the grid
@@ -93,6 +100,27 @@
                 }
             });
         }
+
+        //fetchGridPostData();
+        //get method일 경우 controller에서 requestBody를 못받는다. POST로 할 경우는 아래와 같다.
+        function fetchGridPostData() {
+            var jsonData = {"ctgName": "${article.ctgName}" };
+            $.ajax({
+                type: 'POST',
+                url: "/articleListDataPOST",
+                contentType: 'application/json',
+                dataType: 'json',
+                data : JSON.stringify(jsonData),
+                async: true,
+                success: function (result) {
+                    // set the new data
+                    $("#jqGrid").jqGrid('setGridParam', { data: result.rows});
+                    // refresh the grid
+                    $("#jqGrid").trigger('reloadGrid');
+                }
+            });
+        }
+
 
         function formatContents(cellValue, options, rowObject) {
             return cellValue.substring(0, 50) + "...";

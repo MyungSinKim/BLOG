@@ -36,4 +36,7 @@ public class ArticleCtgController {
         String json = new Gson().toJson(articleCtgList );
         return json;
     }
+
+
+
 }

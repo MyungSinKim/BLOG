@@ -22,9 +22,14 @@
         <put-attribute name="body" value="/WEB-INF/pages/article/articleList.jsp" />
     </definition>
 
+    <definition name="article/articleList" extends="default">
+        <put-attribute name="body" value="/WEB-INF/pages/article/articleList.jsp" />
+    </definition>
+
     <definition name="article/article" extends="default">
         <put-attribute name="body" value="/WEB-INF/pages/article/article.jsp" />
     </definition>
+
 
 
 </tiles-definitions>

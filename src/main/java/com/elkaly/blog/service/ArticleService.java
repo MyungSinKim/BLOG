@@ -34,5 +34,8 @@ public class ArticleService {
     public List<Article> getArticles(){
         return articleRepository.getArticles();
     }
+    public List<Article> getArticles(Article article){
+        return articleRepository.getArticles(article);
+    }
 
 }

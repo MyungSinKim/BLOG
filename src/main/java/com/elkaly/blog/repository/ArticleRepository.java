@@ -33,5 +33,8 @@ public class ArticleRepository {
     public List<Article> getArticles(){
         return sqlSession.selectList("Article.selectArticles");
     }
+    public List<Article> getArticles(Article article){
+        return sqlSession.selectList("Article.selectArticles", article);
+    }
 
 }
